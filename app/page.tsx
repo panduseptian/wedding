@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { GiFlowerPot } from "react-icons/gi";
 import { client } from "@/utils/service";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -88,14 +89,14 @@ export default function Home() {
             <Timer
               targetDate={moment("2023-06-03 11:00:00").toDate().getTime()}
             />
-            <div className="flex text-white flex-col items-center">
+            {/* <div className="flex text-white flex-col items-center">
               <p>Kepada</p>
               <p className="capitalize">{kepada}</p>
               <p>Di</p>
               <p className="capitalize">{tempat}</p>
-            </div>
+            </div> */}
             <button
-              className="bg-[#F67D7C] text-white px-6 py-2 rounded-full"
+              className="bg-[#F67D7C] text-white px-6 py-2 rounded-full mt-10"
               onClick={() => setWelcome(false)}
             >
               Buka Undangan
@@ -104,7 +105,7 @@ export default function Home() {
         </div>
       )}
 
-      <audio src="/sound.mp3" autoPlay={true} />
+      <audio src="/sound.mp3" autoPlay={true} loop={true} />
 
       {!welcome && (
         <div className="bg-[#F8EDE7] min-h-screen min-w-full flex flex-col">
@@ -190,6 +191,50 @@ export default function Home() {
                   Ibukota Jakarta 13140
                 </p>
               </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center my-10 text-center text-[#7D3514] gap-5 px-5">
+            <GiFlowerPot size={"70px"} color="#7D3514" />
+            <p className="font-serif text-4xl">Peta lokasi</p>
+            <p className="text-center text-[#8d624dc5] text-sm">
+              Anda dapat menuju lokasi acara kami dengan bantuan peta dibawah
+              ini. Atau anda bisa buka di
+            </p>
+            <Link
+              href={"https://maps.app.goo.gl/zNVbtrqcahjwcVGC7"}
+              target="_blank"
+              className="bg-[#7D3514] text-white px-6 py-2"
+            >
+              Google Map
+            </Link>
+            <div className="bg-white rounded-md shadow-md p-5 w-full flex flex-col gap-6">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.4181017652722!2d106.86166419999999!3d-6.208454700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f47c596c21f3%3A0x5a638cb6796842b5!2sAsrama%20Mahasiswa%20Kalimantan%20Barat!5e0!3m2!1sid!2sid!4v1685193011014!5m2!1sid!2sid"
+                width="100%"
+                height="250"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center my-10 text-center text-[#7D3514] gap-5 px-5">
+            <GiFlowerPot size={"70px"} color="#7D3514" />
+            <p className="font-serif text-4xl">Galeri Photo</p>
+
+            <div className="flex flex-col gap-3">
+              {[...Array(10).keys()].map((v) => (
+                <div key={v}>
+                  <img
+                    src={`/galeri/${v + 1}.jpeg`}
+                    className="w-full rounded-md"
+                    alt=""
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
