@@ -23,6 +23,8 @@ export default function Home() {
   const [pesan, setPesan] = useState("");
   const [thanks, setThanks] = useState<string | null>(null);
 
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
   useEffect(() => {
     const data = params.get("kepada")?.split("-");
     if (data) {
@@ -31,6 +33,8 @@ export default function Home() {
     }
 
     getUcapan();
+
+    setAudio(new Audio("/sound.mp3"));
   }, []);
 
   const getUcapan = () => {
@@ -97,7 +101,10 @@ export default function Home() {
             </div> */}
             <button
               className="bg-[#F67D7C] text-white px-6 py-2 rounded-full mt-10"
-              onClick={() => setWelcome(false)}
+              onClick={() => {
+                audio?.play();
+                setWelcome(false);
+              }}
             >
               Buka Undangan
             </button>
@@ -105,7 +112,7 @@ export default function Home() {
         </div>
       )}
 
-      <audio src="/sound.mp3" autoPlay={true} loop={true} />
+      {/* <audio src="/sound.mp3" autoPlay={true} loop={true} /> */}
 
       {!welcome && (
         <div className="bg-[#F8EDE7] min-h-screen min-w-full flex flex-col">
